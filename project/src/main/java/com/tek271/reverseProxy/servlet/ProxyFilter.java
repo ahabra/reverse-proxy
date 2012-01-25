@@ -57,6 +57,10 @@ public class ProxyFilter implements Filter {
   
   private static Tuple2<Mapping, String> mapUrlProxyToHidden(ServletRequest request) {
     String oldUrl = ((HttpServletRequest)request).getRequestURL().toString();
+	String queryString = ((HttpServletRequest)request).getQueryString();  
+	if (queryString != null) {
+		oldUrl += "?"+queryString;
+	}
     return UrlMapper.mapFullUrlProxyToHidden(oldUrl);
   }
   
